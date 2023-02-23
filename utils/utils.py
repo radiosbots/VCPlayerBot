@@ -11,7 +11,7 @@ try:
         read_buffer = metaint+255
         content = response.read(read_buffer)
         title = content[metaint:].split("'")[1]
-        print title
+        
 except:
     print 'Error'
 # Copyright (C) @subinps
