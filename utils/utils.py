@@ -40,6 +40,21 @@ try:
     import sys
     import os
     import math
+    import urllib2
+stream_url = 'http://pub1.di.fm/di_classictrance'
+request = urllib2.Request(stream_url)
+try:
+    request.add_header('Icy-MetaData', 1)
+    response = urllib2.urlopen(request)
+    icy_metaint_header = response.headers.get('icy-metaint')
+    if icy_metaint_header is not None:
+        metaint = int(icy_metaint_header)
+        read_buffer = metaint+255
+        content = response.read(read_buffer)
+        title = content[metaint:].split("'")[1]
+        print title
+except:
+    print 'Error'
     from pyrogram.errors.exceptions.bad_request_400 import (
         BadRequest, 
         ScheduleDateInvalid,
@@ -896,11 +911,11 @@ async def chek_the_media(link, seek=False, pic=False, title="Music"):
 
 async def edit_title():
     if Config.STREAM_LINK:
-        title="Live Stream"
+        title= stream_url
     elif Config.playlist:
         title = Config.playlist[0][1]   
     else:       
-        title = "Live Stream"
+        title = stream_url
     try:
         chat = await USER.resolve_peer(Config.CHAT)
         full_chat=await USER.send(
