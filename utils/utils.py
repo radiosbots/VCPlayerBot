@@ -1,19 +1,4 @@
 #!/usr/bin/env python3
-import urllib2
-stream_url = 'https://qurango.net/radio/mix'
-request = urllib2.Request(stream_url)
-try:
-    request.add_header('Icy-MetaData', 1)
-    response = urllib2.urlopen(request)
-    icy_metaint_header = response.headers.get('icy-metaint')
-    if icy_metaint_header is not None:
-        metaint = int(icy_metaint_header)
-        read_buffer = metaint+255
-        content = response.read(read_buffer)
-        title = content[metaint:].split("'")[1]
-        
-except:
-  
 # Copyright (C) @subinps
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
