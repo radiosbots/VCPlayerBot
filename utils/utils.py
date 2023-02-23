@@ -41,7 +41,7 @@ try:
     import os
     import math
     import urllib2
-stream_url = 'http://pub1.di.fm/di_classictrance'
+stream_url = 'https://qurango.net/radio/mix'
 request = urllib2.Request(stream_url)
 try:
     request.add_header('Icy-MetaData', 1)
